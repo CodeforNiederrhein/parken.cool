@@ -19,13 +19,13 @@ const IconWrapper = styled.div`
 
 const ParkingNameWrapper = styled.div`
   font-weight: 500;
-  size: 1.2em;
+  font-size: 1.2em;
   margin-right: 1em;
   flex: 1;
 `
 
 const CurrentWrapper = styled.div`
-  font-weight: 400;
+  font-weight: 500;
   color: #e5d4ff;
 `
 
@@ -37,6 +37,7 @@ const NormalWrapper = styled.div`
 const ContentWrapper = styled.div`
   display: flex;
   flex: 1;
+  align-items: center;
 `
 
 

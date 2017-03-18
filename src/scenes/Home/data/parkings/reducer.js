@@ -26,7 +26,8 @@ const reducer = (state = initialState, action) => {
     case `${FETCH_LIST}_PENDING`:
       return {
         ...state,
-        loading: true
+        loading: true,
+        error: false
       }
     case `${FETCH_LIST}_FULFILLED`:
       const normalizedData = normalize(action.payload.parkings, parkingListSchema)
@@ -38,7 +39,8 @@ const reducer = (state = initialState, action) => {
         },
         all: normalizedData.result,
         timestamp: action.payload.timestamp,
-        loading: false
+        loading: false,
+        error: false
       }
     default:
       return state
@@ -47,5 +49,6 @@ const reducer = (state = initialState, action) => {
 
 export const getAllParkings = (state) => state.scenes.home.data.parkings.all.map(id => state.scenes.home.data.parkings.byId[id])
 export const getLoading = (state) => state.scenes.home.data.parkings.loading
+export const getError = (state) => state.scenes.home.data.parkings.error
 
 export default reducer

@@ -1,5 +1,6 @@
 import React, { PureComponent, PropTypes } from 'react'
 import CircularProgress from 'material-ui/CircularProgress'
+import ErrorIcon from 'material-ui/svg-icons/alert/error'
 import { Content } from '../Styles'
 import Icon from '../Icon'
 import styled from 'styled-components'
@@ -23,6 +24,7 @@ const StatusArea = styled.div`
   flex: 1;
   align-self: flex-end;
   display: flex;
+  align-self: center;
   align-items: flex-end;
   flex-direction: column;
 `
@@ -34,6 +36,7 @@ class TopBar extends PureComponent {
   }
 
   render () {
+
     return (
       <TopBarWrapper>
         <ContentWrapped>
@@ -43,7 +46,8 @@ class TopBar extends PureComponent {
           </div>
           <StatusArea>
             {
-              this.props.loading ? <CircularProgress size={32} /> : ''
+              this.props.error ? <ErrorIcon color='white' /> :
+                this.props.loading ? <CircularProgress size={32} /> : ''
             }
           </StatusArea>
         </ContentWrapped>

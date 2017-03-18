@@ -1,0 +1,40 @@
+{
+  "short_name": "parken.cool",
+  "name": "parken.cool",
+  "icons": [
+    {
+      "src": "./icons/play/ic_launcher_APP.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/xxxhdpi/ic_launcher_APP.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/xxhdpi/ic_launcher_APP.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/xhdpi/ic_launcher_APP.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/hdpi/ic_launcher_APP.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/mdpi/ic_launcher_APP.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "default_locale": "de",
+  "background_color": "#280b54"
+}
