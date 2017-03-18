@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { Content } from '../../components/Styles'
 import TopBar from '../../components/TopBar'
 import { fetchParkingData } from './data/parkings/actions'
-import { getAllParkings } from './data/parkings/reducer'
+import { getAllParkings, getLoading } from './data/parkings/reducer'
+import Parking from './components/Parking'
 
 class HomeScene extends Component {
   componentDidMount () {
@@ -13,13 +14,11 @@ class HomeScene extends Component {
   render() {
     return (
       <div>
-        <TopBar />
+        <TopBar loading={this.props.loading} />
         <Content>
-          <ul>
-            {this.props.parkings.map((parking) => (
-              <li key={parking.id}>{parking.name} ({parking.current} / {parking.total})</li>
-            ))}
-          </ul>
+          {this.props.parkings.map((parking) => (
+            <Parking key={parking.id} parking={parking} />
+          ))}
         </Content>
       </div>
     );
@@ -27,7 +26,8 @@ class HomeScene extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  parkings: getAllParkings(state)
+  parkings: getAllParkings(state),
+  loading: getLoading(state)
 })
 
 export default connect(mapStateToProps, {
