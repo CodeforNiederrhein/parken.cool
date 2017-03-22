@@ -5,6 +5,9 @@ export const Content = styles.div`
   margin: 0 auto;
   padding: 0;
 
+  ${props => props.withMargin ? `
+    margin: 16px auto;
+    padding: 0 16px;
+  ` : ''}
   ${props => props.paddingAbove ? 'padding-top: 64px;' : ''}
-  ${props => props.withMargin ? 'margin: 16px' : ''}
 `

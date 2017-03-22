@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import { Content } from '../../components/Styles'
 import TopBar from '../../components/TopBar'
@@ -6,7 +6,7 @@ import { fetchParkingData } from './data/parkings/actions'
 import { getAllParkings, getLoading, getError } from './data/parkings/reducer'
 import ParkingList from './components/ParkingList'
 
-class HomeScene extends Component {
+class HomeScene extends PureComponent {
   componentDidMount () {
     this.intervalLoadingData = window.setInterval(
       () => this.props.fetchParkingData(),
@@ -28,12 +28,6 @@ class HomeScene extends Component {
 
         <Content paddingAbove>
           <ParkingList parkings={parkings} />
-        </Content>
-
-        <Content withMargin>
-          <p>Diese App entstand auf einer OpenData-Veranstaltung bei der Stadt Moers. Diese App basiert auf <a href='https://www.offenesdatenportal.de/dataset/parkleitsystem-stadt-kleve/resource/d900652f-5104-457a-8dcd-696fb1441b62' target='_blank' style={{color: 'white'}}>Daten, die die Stadt Kleve kostenfrei für jede*n zur freien Verfügung stellt</a>.</p>
-
-          <p>Gebaut wurde die Anwendung von <a href='https://elmarburke.de/' target='_blank' style={{color: 'white'}}>Elmar Burke</a>.</p>
         </Content>
       </div>
     );

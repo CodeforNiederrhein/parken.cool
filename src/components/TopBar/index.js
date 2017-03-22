@@ -1,10 +1,13 @@
 import React, { PureComponent, PropTypes } from 'react'
 import AppBar from 'material-ui/AppBar'
-import ErrorIcon from 'material-ui/svg-icons/alert/error'
+import InfoIcon from 'material-ui/svg-icons/action/info-outline'
+import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import IconButton from 'material-ui/IconButton'
 import Icon from '../Icon'
 import styled from 'styled-components'
 import LinearProgress from 'material-ui/LinearProgress'
+import { Link, withRouter } from 'react-router-dom'
+import { red500 } from 'material-ui/styles/colors'
 
 const TopBarWrapper = styled.header`
   position: fixed !important;
@@ -33,23 +36,34 @@ const Title = () => (
 class TopBar extends PureComponent {
   static propTypes = {
     loading: PropTypes.bool,
-    error: PropTypes.bool
+    error: PropTypes.bool,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    }).isRequired
   }
 
   render () {
-    const { error, loading } = this.props
+    const { loading, error, location: { pathname } } = this.props
+
+    const rightElement = pathname === '/info' ?
+      <IconButton containerElement={<Link to='/'/>}><CloseIcon /></IconButton> :
+      <IconButton containerElement={<Link to='/info'/>}><InfoIcon /></IconButton>
 
     return (
       <TopBarWrapper>
         <AppBar
           title={<Title />}
-          iconElementRight={error ? <IconButton><ErrorIcon /></IconButton> : undefined}
+          iconElementRight={rightElement}
           showMenuIconButton={false}
         />
-        { loading && <LinearProgress mode='indeterminate' style={{backgroundColor: ''}} /> }
+        {
+          loading ? <LinearProgress mode='indeterminate' style={{backgroundColor: ''}} /> :
+          error ? <LinearProgress mode='determinate' value={100} color={red500} /> :
+          undefined
+        }
       </TopBarWrapper>
     )
   }
 }
 
-export default TopBar
+export default withRouter(TopBar)
