@@ -1,33 +1,33 @@
 import React, { PureComponent, PropTypes } from 'react'
-import CircularProgress from 'material-ui/CircularProgress'
+import AppBar from 'material-ui/AppBar'
 import ErrorIcon from 'material-ui/svg-icons/alert/error'
-import { Content } from '../Styles'
+import IconButton from 'material-ui/IconButton'
 import Icon from '../Icon'
 import styled from 'styled-components'
+import LinearProgress from 'material-ui/LinearProgress'
 
 const TopBarWrapper = styled.header`
-  padding: 1.5em 0;
-  background-color: #180733;
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+`
+const IconStyled = styled(Icon)`
+  max-height: 32px;
+  margin-right: .3em;
 `
 
-const ContentWrapped = styled(Content)`
+const TitleWrapper = styled.div`
   display: flex;
   align-items: center;
 `
 
-const IconStyled = styled(Icon)`
-  max-height: 32px;
-  margin-right: 1em;
-`
-
-const StatusArea = styled.div`
-  flex: 1;
-  align-self: flex-end;
-  display: flex;
-  align-self: center;
-  align-items: flex-end;
-  flex-direction: column;
-`
+const Title = () => (
+  <TitleWrapper>
+    <IconStyled />
+    parken.cool
+  </TitleWrapper>
+)
 
 class TopBar extends PureComponent {
   static propTypes = {
@@ -36,21 +36,16 @@ class TopBar extends PureComponent {
   }
 
   render () {
+    const { error, loading } = this.props
 
     return (
       <TopBarWrapper>
-        <ContentWrapped>
-          <IconStyled />
-          <div>
-            parken.cool
-          </div>
-          <StatusArea>
-            {
-              this.props.error ? <ErrorIcon color='white' /> :
-                this.props.loading ? <CircularProgress size={32} /> : ''
-            }
-          </StatusArea>
-        </ContentWrapped>
+        <AppBar
+          title={<Title />}
+          iconElementRight={error ? <IconButton><ErrorIcon /></IconButton> : undefined}
+          showMenuIconButton={false}
+        />
+        { loading && <LinearProgress mode='indeterminate' style={{backgroundColor: ''}} /> }
       </TopBarWrapper>
     )
   }

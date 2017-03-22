@@ -14,14 +14,6 @@ const initialState = {
 }
 
 const reducer = (state = initialState, action) => {
-  if (action.error) {
-    return {
-      ...state,
-      error: action.payload,
-      timestamp: ''
-    }
-  }
-
   switch (action.type) {
     case `${FETCH_LIST}_PENDING`:
       return {
@@ -41,6 +33,12 @@ const reducer = (state = initialState, action) => {
         timestamp: action.payload.timestamp,
         loading: false,
         error: false
+      }
+    case `${FETCH_LIST}_REJECTED`:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
       }
     default:
       return state
