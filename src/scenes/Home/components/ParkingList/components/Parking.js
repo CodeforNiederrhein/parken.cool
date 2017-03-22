@@ -4,6 +4,7 @@ import ArrowDown from 'material-ui/svg-icons/action/trending-down'
 import ArrowUp from 'material-ui/svg-icons/action/trending-up'
 import ArrowFlat from 'material-ui/svg-icons/action/trending-flat'
 import Help from 'material-ui/svg-icons/action/help-outline'
+import Close from 'material-ui/svg-icons/navigation/close'
 import Avatar from 'material-ui/Avatar';
 import { green500, lightWhite, red500 } from 'material-ui/styles/colors'
 import styled from 'styled-components'
@@ -24,6 +25,14 @@ const arrows = {
   'undefined': {
     color: lightWhite,
     Arrow: Help
+  },
+  'failure': {
+    color: lightWhite,
+    Arrow: Help
+  },
+  'closed': {
+    color: lightWhite,
+    Arrow: Close
   }
 }
 
@@ -49,10 +58,11 @@ class Parking extends PureComponent {
       name,
       trend,
       total,
-      current
+      current,
+      state
     } = this.props.parking
 
-    const { Arrow, color } = arrows[trend]
+    const { Arrow, color } = state && state !== 'open' ? arrows[state] : arrows[trend]
 
     const capacity = (
       <NumberWrapper>
