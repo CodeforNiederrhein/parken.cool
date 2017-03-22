@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -34,17 +34,18 @@ const muiTheme = getMuiTheme({
   }
 });
 
-class App extends PureComponent {
+class App extends Component {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
-        <Router>
+        <div>
           <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/info" component={Info}/>
+            <Route exact path="/:city" component={Home}/>
+            <Route path="/:city/info" component={Info}/>
+            <Redirect strict from='/' to={`/${window.localStorage.getItem('city') || 'kleve'}`} />
             <Route component={NoMatch}/>
           </Switch>
-        </Router>
+        </div>
       </MuiThemeProvider>
     );
   }

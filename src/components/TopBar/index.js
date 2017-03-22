@@ -3,11 +3,12 @@ import AppBar from 'material-ui/AppBar'
 import InfoIcon from 'material-ui/svg-icons/action/info-outline'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
 import IconButton from 'material-ui/IconButton'
-import Icon from '../Icon'
 import styled from 'styled-components'
 import LinearProgress from 'material-ui/LinearProgress'
 import { Link, withRouter } from 'react-router-dom'
 import { red500 } from 'material-ui/styles/colors'
+
+import Title from './components/Title'
 
 const TopBarWrapper = styled.header`
   position: fixed !important;
@@ -16,22 +17,6 @@ const TopBarWrapper = styled.header`
   left: 0;
   right: 0;
 `
-const IconStyled = styled(Icon)`
-  max-height: 32px;
-  margin-right: .3em;
-`
-
-const TitleWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const Title = () => (
-  <TitleWrapper>
-    <IconStyled />
-    parken.cool
-  </TitleWrapper>
-)
 
 class TopBar extends PureComponent {
   static propTypes = {
@@ -39,20 +24,21 @@ class TopBar extends PureComponent {
     error: PropTypes.bool,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    city: PropTypes.string.isRequired
   }
 
   render () {
-    const { loading, error, location: { pathname } } = this.props
+    const { loading, error, city, match: { path, url, params } } = this.props
 
-    const rightElement = pathname === '/info' ?
-      <IconButton containerElement={<Link to='/'/>}><CloseIcon /></IconButton> :
-      <IconButton containerElement={<Link to='/info'/>}><InfoIcon /></IconButton>
+    const rightElement = path === '/:city/info' ?
+      <IconButton containerElement={<Link to={`/${params.city}`} />}><CloseIcon /></IconButton> :
+      <IconButton containerElement={<Link to={`${url}/info`} />}><InfoIcon /></IconButton>
 
     return (
       <TopBarWrapper>
         <AppBar
-          title={<Title />}
+          title={<Title city={city} />}
           iconElementRight={rightElement}
           showMenuIconButton={false}
         />

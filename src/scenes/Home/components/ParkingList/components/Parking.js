@@ -3,6 +3,7 @@ import {ListItem} from 'material-ui/List';
 import ArrowDown from 'material-ui/svg-icons/action/trending-down'
 import ArrowUp from 'material-ui/svg-icons/action/trending-up'
 import ArrowFlat from 'material-ui/svg-icons/action/trending-flat'
+import Help from 'material-ui/svg-icons/action/help-outline'
 import Avatar from 'material-ui/Avatar';
 import { green500, lightWhite, red500 } from 'material-ui/styles/colors'
 import styled from 'styled-components'
@@ -19,6 +20,10 @@ const arrows = {
   '-1': {
     color: green500,
     Arrow: ArrowDown
+  },
+  'undefined': {
+    color: lightWhite,
+    Arrow: Help
   }
 }
 

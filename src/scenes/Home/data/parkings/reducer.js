@@ -8,6 +8,7 @@ const parkingListSchema = [ parkingSchema ]
 const initialState = {
   byId: {},
   all: [],
+  allByCity: {},
   timestamp: '',
   loading: false,
   error: null
@@ -30,6 +31,10 @@ const reducer = (state = initialState, action) => {
           ...normalizedData.entities.parking
         },
         all: normalizedData.result,
+        allByCity: {
+          ...state.allByCity,
+          [action.payload.city]: normalizedData.result
+        },
         timestamp: action.payload.timestamp,
         loading: false,
         error: false
@@ -45,6 +50,8 @@ const reducer = (state = initialState, action) => {
   }
 }
 
+const getAllParkingsIdByCity = (state, city) => state.scenes.home.data.parkings.allByCity[city] || []
+export const getAllParkingsByCity = (state, city) => getAllParkingsIdByCity(state, city).map(id => state.scenes.home.data.parkings.byId[id])
 export const getAllParkings = (state) => state.scenes.home.data.parkings.all.map(id => state.scenes.home.data.parkings.byId[id])
 export const getLoading = (state) => state.scenes.home.data.parkings.loading
 export const getError = (state) => state.scenes.home.data.parkings.error
