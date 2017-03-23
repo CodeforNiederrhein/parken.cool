@@ -1,14 +1,13 @@
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import Link from '../../components/Styles/Link'
 import { Content } from '../../components/Styles'
 import TopBar from '../../components/TopBar'
 
 class NoMatchScene extends PureComponent {
   render() {
-    const { city } = this.props.match.params
     return (
       <div>
-        <TopBar city={city} />
+        <TopBar />
 
         <Content paddingAbove withMargin>
           <p>Diese App entstand auf einer OpenData-Veranstaltung bei der Stadt Moers.</p>
