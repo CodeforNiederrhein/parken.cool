@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import {
   Route,
   Switch,
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom'
 
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -34,7 +35,7 @@ const muiTheme = getMuiTheme({
   }
 });
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
@@ -51,4 +52,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
